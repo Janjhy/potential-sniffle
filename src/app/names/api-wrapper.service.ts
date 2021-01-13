@@ -13,7 +13,7 @@ export class ApiWrapperService {
   constructor(private http: HttpClient) {  }
 
   // get("/names")
-  getNames(): Observable<void | Name[]> {
+  getNames(): Observable<Name[]> {
     this.http.get(this.nameUrl).subscribe(res => this.activeNames.next(res));
     return this.activeNames;
   }

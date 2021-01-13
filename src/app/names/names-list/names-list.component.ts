@@ -20,6 +20,7 @@ export class NamesListComponent implements OnInit {
   ngOnInit(): void {
     this.namesData = new NamesDataSource(this.apiWrapperService);
     this.namesData.loadNames();
+    console.log(this.namesData);
   }
 
 }

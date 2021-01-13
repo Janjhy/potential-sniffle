@@ -15,7 +15,6 @@ export class ApiWrapperService {
   // get("/names")
   getNames(): Observable<Name[]> {
     this.http.get(this.nameUrl).subscribe(res => this.activeNames.next(res));
-    console.log(this.activeNames);
     return this.activeNames;
   }
 }

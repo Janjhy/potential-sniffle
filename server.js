@@ -16,7 +16,7 @@ const server = app.listen(process.env.PORT, function () {
 
 //Simple API which returns information from the included names.json file
 
-app.get('/names', (req, res) => {
+app.get('./src/data/names.json', (req, res) => {
   fs.readFile(path, (err, data) => {
     if (err) {
       throw err;

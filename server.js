@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const path = './data.users.json';
+const path = './src/data/names.json';
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ const server = app.listen(process.env.PORT, function () {
 });
 
 //Simple API which returns information from the included names.json file
-app.get('./src/data/names.json', (req, res) => {
+app.get('/names', (req, res) => {
   fs.readFile(path, (err, data) => {
     if (err) {
       throw err;

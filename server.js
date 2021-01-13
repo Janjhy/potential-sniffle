@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/dist/'));
 
 //Init the server.
-const server = app.listen(process.env.PORT || 8080, function () {
+const server = app.listen(process.env.PORT, function () {
   console.log("Running on port", server.address().port);
 });
 
@@ -19,7 +19,7 @@ const server = app.listen(process.env.PORT || 8080, function () {
 app.get('/names', (req, res) => {
   fs.readFile(path, (err, data) => {
     if (err) {
-      handleError(res, err.message, "Failed to read names.");
+      throw err;
     } else {
       res.json(data);
     }

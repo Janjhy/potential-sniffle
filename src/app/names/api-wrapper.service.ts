@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Name} from '../name';
 
 @Injectable({
@@ -8,13 +8,14 @@ import {Name} from '../name';
 })
 export class ApiWrapperService {
   private nameUrl = '/names';
-  public activeNames: ReplaySubject<any> = new ReplaySubject();
+  public activeNames: BehaviorSubject<any> = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) {  }
 
   // get("/names")
   getNames(): Observable<Name[]> {
     this.http.get(this.nameUrl).subscribe(res => this.activeNames.next(res));
+    console.log(this.activeNames);
     return this.activeNames;
   }
 }

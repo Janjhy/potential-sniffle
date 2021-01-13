@@ -21,5 +21,4 @@ export class NamesDataSource implements DataSource<Name> {
     this.apiWrapperService.getNames().subscribe(names => this.namesSubject.next(names));
   }
 
-
 }

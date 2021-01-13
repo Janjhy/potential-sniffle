@@ -16,12 +16,11 @@ const server = app.listen(process.env.PORT, function () {
 
 //Simple API which returns information from the included names.json file
 app.get('/names', (req, res) => {
-  fs.readFile(path, (err, data) => {
+  fs.readFile(path, 'utf8',(err, data) => {
     if (err) {
       throw err;
     } else {
-      console.log(data);
-      res.json(data);
+      res.send(JSON.parse(data));
     }
   })
 });

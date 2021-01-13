@@ -13,6 +13,7 @@ export class NamesListComponent implements OnInit {
 
   // @ts-ignore
   namesData: NamesDataSource;
+  displayedColumns = ['position', 'name', 'amount'];
 
   constructor(private apiWrapperService: ApiWrapperService) { }
 

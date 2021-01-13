@@ -17,5 +17,8 @@
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let name">{{name.amount}}</td>
     </ng-container>
+
+    <tr mat-header-row *matHeaderCellDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns; displayedColumns;"></tr>
   </table>
 </div>

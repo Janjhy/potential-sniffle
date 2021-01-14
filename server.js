@@ -20,7 +20,8 @@ app.get('/names', (req, res) => {
     if (err) {
       throw err;
     } else {
-      res.send(JSON.parse(data));
+      const parsedData = JSON.parse(data)
+      if(parsedData.names) res.send(parsedData.names);
     }
   })
 });

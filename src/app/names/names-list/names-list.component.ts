@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Name} from '../../name';
+import {Name} from '../../model/name';
 import {ApiWrapperService} from '../api-wrapper.service';
 import {NamesDataSource} from '../names-datasource';
 
@@ -19,8 +19,7 @@ export class NamesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.namesData = new NamesDataSource(this.apiWrapperService);
-    this.namesData.loadNames();
-    console.log(this.namesData);
+    const x = this.namesData.loadNames();
   }
 
 }

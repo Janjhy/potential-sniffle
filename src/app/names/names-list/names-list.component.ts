@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Name} from '../../model/name';
+import {Component, OnInit} from '@angular/core';
 import {ApiWrapperService} from '../api-wrapper.service';
 import {NamesDataSource} from '../names-datasource';
+import {MatButtonToggleGroup} from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-names-list',
@@ -14,12 +14,21 @@ export class NamesListComponent implements OnInit {
   // @ts-ignore
   namesData: NamesDataSource;
   displayedColumns = ['position', 'name', 'amount'];
+  isActive = true;
 
-  constructor(private apiWrapperService: ApiWrapperService) { }
+  constructor(private apiWrapperService: ApiWrapperService) {
+  }
 
   ngOnInit(): void {
     this.namesData = new NamesDataSource(this.apiWrapperService);
-    const x = this.namesData.loadNames();
+    this.namesData.loadNames();
   }
 
+  onValueChange(value: string): void {
+    this.namesData.sortArray(value);
+  }
+
+  getTotalAmount(): number {
+    return this.namesData.getTotalAmount();
+  }
 }

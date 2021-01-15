@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {NamesListComponent} from './names/names-list/names-list.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {MatTableModule} from '@angular/material/table';
   imports: [
     BrowserModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

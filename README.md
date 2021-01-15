@@ -1,27 +1,28 @@
 # NameAppTask
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
+This project uses Angular for the web application. 
+Node.js and Express is used for the mock server/api. It reads a json file and provides routes to fetch all data or by the name parameter.
 
-## Development server
+## Running
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Use 
+`npm install`
+and
+`npm start`
+to run the project. Unless you specify a port for the server, you can find the port logged to console and navigate to the according localhost address.
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Route
+`/names` 
+is used to fetch all data as a parsed json.
 
-## Build
+Route 
+`/names/:search?=name`
+Name is the parameter you want to search by. This is case sensitive. The return for this a simple string 
+on your browser.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Route
+`/`
+leads to the we UI which displays the names.json data in a table and has options for sorting names by alphabet, or by amount(descending).
+Total amount of all names is listed at the footer of the table.

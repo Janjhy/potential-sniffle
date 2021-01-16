@@ -2,6 +2,7 @@ import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {Name} from '../model/name';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiWrapperService} from './api-wrapper.service';
+import {tap} from 'rxjs/operators';
 
 export class NamesDataSource implements DataSource<Name> {
 
@@ -9,7 +10,9 @@ export class NamesDataSource implements DataSource<Name> {
   }
 
   private namesSubject = new BehaviorSubject<Name[]>([]);
+  private totalAmount = 0;
 
+  // Updates the BehaviourSubject value
   private updateArray(data: Array<Name>): void {
     this.namesSubject.next(data);
   }
@@ -22,12 +25,14 @@ export class NamesDataSource implements DataSource<Name> {
     this.namesSubject.complete();
   }
 
+  // Loads the observable from service
   loadNames(): void {
-    this.apiWrapperService.getNames().subscribe(names => {
+    this.apiWrapperService.getNames().pipe(tap(arr => this.setTotalAmount(arr))).subscribe(names => {
       this.namesSubject.next(names);
     });
   }
 
+  // Handles the parameter received from names-list component
   sortArray(param: string): void {
     const data = this.namesSubject.getValue();
     switch (param) {
@@ -40,6 +45,7 @@ export class NamesDataSource implements DataSource<Name> {
     }
   }
 
+  // Sorts array by amount, in descending order
   sortByAmount(data: Array<Name>): Array<Name> {
     if (data.length > 0) {
       const temp = data;
@@ -50,6 +56,7 @@ export class NamesDataSource implements DataSource<Name> {
     }
   }
 
+  // Sorts array alphabetically by name
   sortByName(data: Array<Name>): Array<Name> {
     if (data.length > 0) {
       const temp = data;
@@ -60,10 +67,12 @@ export class NamesDataSource implements DataSource<Name> {
     }
   }
 
+  // Calculates the total amount from the received array
+  setTotalAmount(arr: Name[]): void {
+    this.totalAmount = arr.map(val => val.amount).reduce((acc, val) => acc + val, 0);
+  }
+
   getTotalAmount(): number {
-    if (this.namesSubject.getValue().length > 0) {
-      return this.namesSubject.getValue().map(val => val.amount).reduce((acc, val) => acc + val, 0);
-    }
-    return 0;
+    return this.totalAmount;
   }
 }
